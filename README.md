@@ -11,7 +11,7 @@ In particular, it deals with two features: closure locks and on-close handlers.
 
 A closure lock is an object that, when locked, stops the creation of further method scopes
 with an exception. It can be used to guarantee that, after a closeable object has been closed,
-then all outstanding calls to its methods can run to completion but new calls to its methods
+all outstanding calls to its methods can run to completion but new calls to its methods
 lead to an exception.
 
 The simplest use is to extend the `AbstractAutoCloseableWithLock` class as follows:
@@ -19,25 +19,25 @@ The simplest use is to extend the `AbstractAutoCloseableWithLock` class as follo
 ```java
 public class MyCloseable extends AbstractAutoCloseableWithLock<MyException> {
 
-    public MyCloseable() {
-		super(MyException::new);
-	}
+  public MyCloseable() {
+    super(MyException::new);
+  }
 
-    @Override
-	public void close() {
-		if (stopNewCalls())
-			// close all resources here
-	}
+  @Override
+  public void close() {
+    if (stopNewCalls())
+      // close all resources here
+  }
 
-    public String getSomething() throws MyException {
-		try (var scope = mkScope()) {
-			return ...
-		}
-	}
+  public String getSomething() throws MyException {
+    try (var scope = mkScope()) {
+      return ...
+    }
+  }
 }
 ```
 
-After the object is closes, any call to `getSomething()` will throw a `MyException`.
+After the object gets closed, any call to `getSomething()` will throw a `MyException`.
 The call to `stopNewCalls()` allows outstanding calls to `getSomething` to terminate
 before closing all resources. Moreover, `stopNewCalls()` return true only at its first call,
 therefore the resources are closed only once.
@@ -52,15 +52,15 @@ The simplest use is to extend the `AbstractAutoCloseableWithOnCloseHandlers` cla
 ```java
 public class MyCloseable extends AbstractAutoCloseableWithOnCloseHandlers {
 
-    @Override
-	public void close() {
-    	try {
-			callCloseHandlers();
-		}
-		catch (Exception e) {
-			// deal with any exception thrown by the registered close handlers
-		}
-	}
+  @Override
+  public void close() {
+    try {
+      callCloseHandlers();
+    }
+    catch (Exception e) {
+      // deal with any exception thrown by the registered close handlers
+    }
+  }
 }
 ```
 
