@@ -10,7 +10,7 @@
 
   <parent>
     <groupId>io.hotmoka</groupId>
-    <artifactId>closeables</artifactId>
+    <artifactId>io-hotmoka-closeables-parent</artifactId>
     <version>parent</version>
   </parent>
 
