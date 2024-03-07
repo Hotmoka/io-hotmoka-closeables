@@ -69,6 +69,6 @@ Its `close()` method will fire all the registered close handlers through the cal
 `callCloseHandlers()`. Moreover, if a close handler fails with an exception, all other close handlers
 will be executed anyway, and only at the end the first exception will be thrown.
 
-<p align="center"><img width="100" src="pics/CC_license.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 International License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
+<p align="center"><img width="100" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 International License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
 
 <p align="center">Copyright 2024 by Fausto Spoto (fausto.spoto@hotmoka.io)</p>
