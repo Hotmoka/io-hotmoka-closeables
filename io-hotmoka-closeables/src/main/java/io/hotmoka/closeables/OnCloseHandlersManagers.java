@@ -17,14 +17,14 @@ limitations under the License.
 package io.hotmoka.closeables;
 
 import io.hotmoka.closeables.api.OnCloseHandlersManager;
-import io.hotmoka.closeables.internal.CloseHandlersManagerImpl;
+import io.hotmoka.closeables.internal.OnCloseHandlersManagerImpl;
 
 /**
  * Provider of containers of {@link OnCloseHandlersManager}s.
  */
-public final class CloseHandlersManagers {
+public abstract class OnCloseHandlersManagers {
 
-	private CloseHandlersManagers() {}
+	private OnCloseHandlersManagers() {}
 
 	/**
 	 * Yields a new close handlers manager.
@@ -32,6 +32,6 @@ public final class CloseHandlersManagers {
 	 * @return the close handlers manager
 	 */
 	public static OnCloseHandlersManager create() {
-		return new CloseHandlersManagerImpl();
+		return new OnCloseHandlersManagerImpl();
 	}
 }

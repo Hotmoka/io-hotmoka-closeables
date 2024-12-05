@@ -19,7 +19,7 @@ package io.hotmoka.closeables.internal;
 import java.util.function.Supplier;
 
 import io.hotmoka.annotations.ThreadSafe;
-import io.hotmoka.closeables.CloseHandlersManagers;
+import io.hotmoka.closeables.OnCloseHandlersManagers;
 import io.hotmoka.closeables.api.OnCloseHandler;
 import io.hotmoka.closeables.api.OnCloseHandlersContainer;
 import io.hotmoka.closeables.api.OnCloseHandlersManager;
@@ -38,7 +38,7 @@ public abstract class AutoCloseableWithLockAndOnCloseHandlersImpl<E extends Exce
 	/**
 	 * The close handlers manager.
 	 */
-	private final OnCloseHandlersManager manager = CloseHandlersManagers.create();
+	private final OnCloseHandlersManager manager = OnCloseHandlersManagers.create();
 
 	/**
 	 * Creates the autocloseable.
@@ -61,13 +61,9 @@ public abstract class AutoCloseableWithLockAndOnCloseHandlersImpl<E extends Exce
 	}
 
 	/**
-	 * Calls all close handlers added to this object. If any of them fails with an exception,
-	 * it tries to close the others before giving up and throwing the exception.
-	 * 
-	 * @throws InterruptedException if the closure operation gets interrupted
-	 * @throws Exception if some handler throws this exception
+	 * Calls all close handlers added to this object.
 	 */
-	protected void callCloseHandlers() throws InterruptedException, Exception {
-		manager.close();
+	protected void callCloseHandlers() {
+		manager.callCloseHandlers();
 	}
 }

@@ -23,9 +23,9 @@ public interface OnCloseHandler {
 
 	/**
 	 * The code to execute when the object gets closed.
-	 * 
-	 * @throws Exception if the closure failed for some reason
-	 * @throws InterruptedException if the closure has been interrupted
+	 * Note that this method throws no exception: if the implementation code
+	 * encounters an {@code InterruptedException}, then it should catch it and set the
+	 * interruption flag; any other kind of exception should just be logged.
 	 */
-	void close() throws Exception, InterruptedException;
+	void close();
 }

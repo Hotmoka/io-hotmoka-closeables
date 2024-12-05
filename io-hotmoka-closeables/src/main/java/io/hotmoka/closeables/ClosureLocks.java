@@ -22,7 +22,7 @@ import io.hotmoka.closeables.internal.ClosureLockImpl;
 /**
  * Provider of closure locks.
  */
-public final class ClosureLocks {
+public abstract class ClosureLocks {
 
 	private ClosureLocks() {}
 

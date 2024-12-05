@@ -26,7 +26,7 @@ import io.hotmoka.closeables.api.OnCloseHandlersManager;
  * An implementation of a container of close handlers that, when closed, calls all the registered handlers.
  */
 @ThreadSafe
-public class CloseHandlersManagerImpl implements OnCloseHandlersManager {
+public class OnCloseHandlersManagerImpl implements OnCloseHandlersManager {
 
 	/**
 	 * The handlers to run when this object gets closed.
@@ -44,18 +44,7 @@ public class CloseHandlersManagerImpl implements OnCloseHandlersManager {
 	}
 
 	@Override
-	public void close() throws InterruptedException, Exception {
-		callCloseHandlers(onCloseHandlers.toArray(OnCloseHandler[]::new), 0);
-	}
-
-	private void callCloseHandlers(OnCloseHandler[] handlers, int pos) throws InterruptedException, Exception {
-		if (pos < handlers.length) {
-			try {
-				handlers[pos].close();
-			}
-			finally { // TODO: what if the call has been interrupted? Is the interrupted flag still on here?
-				callCloseHandlers(handlers, pos + 1);
-			}
-		}
+	public void callCloseHandlers() {
+		onCloseHandlers.forEach(OnCloseHandler::close);
 	}
 }
